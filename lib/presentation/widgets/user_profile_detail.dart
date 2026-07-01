@@ -101,13 +101,16 @@ class UserProfileDetail extends StatelessWidget {
           const SizedBox(height: 32),
           _buildDatingGoalCard(user.datingGoalTitle, user.datingGoalDescription),
           const SizedBox(height: 32),
-          Container(
-            height: 400,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(
-                image: NetworkImage(user.largeImageUrl),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: SizedBox(
+              height: 400,
+              width: double.infinity,
+              child: CachedNetworkImage(
+                imageUrl: user.largeImageUrl,
                 fit: BoxFit.cover,
+                placeholder: (context, url) => Container(color: Colors.grey[200]),
+                errorWidget: (context, url, error) => Container(color: Colors.grey[200], child: const Icon(Icons.error)),
               ),
             ),
           ),
@@ -115,23 +118,23 @@ class UserProfileDetail extends StatelessWidget {
           _buildPromptCard(context, user.promptTwoTitle, user.promptTwoDescription),
           const SizedBox(height: 32),
           // Video Intro
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(
-                image: NetworkImage(user.largeImageUrl), // Using large image as placeholder for video thumbnail
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: SizedBox(
+              height: 200,
+              width: double.infinity,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  CachedNetworkImage(
+                    imageUrl: user.largeImageUrl, // Using large image as placeholder for video thumbnail
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(color: Colors.grey[200]),
+                    errorWidget: (context, url, error) => Container(color: Colors.grey[200], child: const Icon(Icons.error)),
+                  ),
+                  Container(
                     color: Colors.black26,
                   ),
-                ),
                 Center(
                   child: Container(
                     padding: const EdgeInsets.all(12),
