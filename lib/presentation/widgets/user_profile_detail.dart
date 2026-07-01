@@ -209,27 +209,31 @@ class UserProfileDetail extends StatelessWidget {
               fontSize: 15,
             ),
           ),
-          const Expanded(child: SizedBox()),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                value,
-                style: const TextStyle(
-                  color: Colors.black87,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              if (subtext != null)
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
                 Text(
-                  subtext,
+                  value,
                   style: const TextStyle(
-                    color: Colors.black38,
-                    fontSize: 12,
+                    color: Colors.black87,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
                   ),
+                  textAlign: TextAlign.right,
                 ),
-            ],
+                if (subtext != null)
+                  Text(
+                    subtext,
+                    style: const TextStyle(
+                      color: Colors.black38,
+                      fontSize: 12,
+                    ),
+                    textAlign: TextAlign.right,
+                  ),
+              ],
+            ),
           ),
         ],
       ),
