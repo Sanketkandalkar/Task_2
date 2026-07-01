@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:dating_app/presentation/widgets/chat/date_invite_card.dart';
+import 'package:dating_app/presentation/widgets/chat/message_bubble.dart';
+import 'package:dating_app/presentation/widgets/chat/sent_gift_card.dart';
 
 class ChatDetailScreen extends StatelessWidget {
   const ChatDetailScreen({super.key});
@@ -167,7 +170,7 @@ class ChatDetailScreen extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 20),
               children: [
-                _buildDateInviteCard(),
+                const DateInviteCard(),
                 const SizedBox(height: 24),
                 Center(
                   child: Container(
@@ -187,13 +190,13 @@ class ChatDetailScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                _buildMessageBubble(
-                  'If you\'re as fun in person as your profile, I\'m in.',
-                  '1:04 PM',
+                const MessageBubble(
+                  text: 'If you\'re as fun in person as your profile, I\'m in.',
+                  time: '1:04 PM',
                   isMe: true,
                 ),
                 const SizedBox(height: 16),
-                _buildSentGiftCard(),
+                const SentGiftCard(),
               ],
             ),
           ),
@@ -283,214 +286,6 @@ class ChatDetailScreen extends StatelessWidget {
             ),
           ]
         ],
-      ),
-    );
-  }
-
-  Widget _buildDateInviteCard() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.pink.withValues(alpha: 0.2)),
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.shield_outlined, color: Colors.blue[300], size: 16),
-              const SizedBox(width: 8),
-              const Expanded(
-                child: Text(
-                  'Meet at the venue - your exact location stays private. Have a great date!',
-                  style: TextStyle(color: Colors.black54, fontSize: 12),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Container(
-            height: 100,
-            decoration: BoxDecoration(
-              color: const Color(0xFFF8F5F2),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Stack(
-              children: [
-                Center(
-                  child: Icon(Icons.location_on, color: Colors.pink[400], size: 40),
-                ),
-                Positioned(
-                  bottom: 12,
-                  left: 12,
-                  child: Row(
-                    children: [
-                      const Icon(Icons.push_pin, color: Colors.red, size: 12),
-                      const SizedBox(width: 4),
-                      const Text('Blue Tokai', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE84C66).withValues(alpha: 0.8),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Center(
-                    child: Text('Add to calendar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Center(
-                    child: Text('Get directions', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold)),
-                  ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMessageBubble(String text, String time, {bool isMe = false}) {
-    return Align(
-      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Container(
-            width: 250, // Limit width
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: isMe ? const Color(0xFFE84C66).withValues(alpha: 0.85) : Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: const Radius.circular(20),
-                topRight: const Radius.circular(20),
-                bottomLeft: isMe ? const Radius.circular(20) : Radius.zero,
-                bottomRight: isMe ? Radius.zero : const Radius.circular(20),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  text,
-                  style: TextStyle(
-                    color: isMe ? Colors.white : Colors.black87,
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      time,
-                      style: TextStyle(
-                        color: isMe ? Colors.white70 : Colors.grey,
-                        fontSize: 10,
-                      ),
-                    ),
-                    if (isMe) ...[
-                      const SizedBox(width: 4),
-                      const Icon(Icons.done_all, color: Colors.white70, size: 12),
-                    ]
-                  ],
-                )
-              ],
-            ),
-          ),
-          if (isMe) ...[
-            const SizedBox(width: 8),
-            const CircleAvatar(
-              radius: 12,
-              backgroundImage: NetworkImage('https://randomuser.me/api/portraits/men/32.jpg'),
-            )
-          ]
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSentGiftCard() {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Container(
-        width: 280,
-        margin: const EdgeInsets.only(right: 32), // Align before the avatar
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF8F5F2),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Text('🌹', style: TextStyle(fontSize: 24)),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Rose', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                      Row(
-                        children: [
-                          const Icon(Icons.monetization_on, color: Colors.amber, size: 14),
-                          const SizedBox(width: 4),
-                          Text('10 coins', style: TextStyle(color: const Color(0xFFE84C66).withValues(alpha: 0.8), fontSize: 12, fontWeight: FontWeight.bold)),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF8F5F2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text('SENT', style: TextStyle(color: const Color(0xFFE84C66).withValues(alpha: 0.8), fontSize: 10, fontWeight: FontWeight.bold)),
-                )
-              ],
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              '"A little something to brighten your day 🌹"',
-              style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic),
-            )
-          ],
-        ),
       ),
     );
   }

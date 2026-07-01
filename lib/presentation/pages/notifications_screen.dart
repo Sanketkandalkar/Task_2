@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dating_app/presentation/widgets/notifications/notification_card.dart';
 
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});
@@ -93,12 +94,11 @@ class NotificationsScreen extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 40),
               children: [
-                _buildNotificationCard(
-                  context: context,
+                const NotificationCard(
                   imageUrl: 'https://randomuser.me/api/portraits/men/32.jpg',
                   icon: Icons.favorite,
                   iconColor: Colors.white,
-                  iconBgColor: const Color(0xFFE84C66),
+                  iconBgColor: Color(0xFFE84C66),
                   titleText: 'Dev, 27 ',
                   titleSuffix: 'sent you a Rose',
                   message: '"Your trekking photos sold me — let\'s swap trail stories."',
@@ -106,8 +106,7 @@ class NotificationsScreen extends StatelessWidget {
                   actionText: 'View profile',
                   isUnread: true,
                 ),
-                _buildNotificationCard(
-                  context: context,
+                NotificationCard(
                   imageUrl: 'https://randomuser.me/api/portraits/men/44.jpg',
                   icon: Icons.chat_bubble_outline,
                   iconColor: Colors.white,
@@ -118,8 +117,7 @@ class NotificationsScreen extends StatelessWidget {
                   time: '3 h ago',
                   isUnread: false,
                 ),
-                _buildNotificationCard(
-                  context: context,
+                const NotificationCard(
                   imageUrl: 'https://randomuser.me/api/portraits/women/44.jpg',
                   icon: Icons.check,
                   iconColor: Colors.white,
@@ -132,20 +130,18 @@ class NotificationsScreen extends StatelessWidget {
                   actionText: 'Send a message',
                   isUnread: true,
                 ),
-                _buildNotificationCard(
-                  context: context,
+                const NotificationCard(
                   imageUrl: 'https://randomuser.me/api/portraits/women/65.jpg',
                   icon: Icons.chat_bubble_outline,
                   iconColor: Colors.white,
-                  iconBgColor: const Color(0xFFE84C66),
+                  iconBgColor: Color(0xFFE84C66),
                   titleText: 'Elena, 23 ',
                   titleSuffix: 'sent you a message',
                   message: '"Haha okay that café pick was elite. When are you free?"',
                   time: '1 h ago',
                   isUnread: true,
                 ),
-                _buildNotificationCard(
-                  context: context,
+                const NotificationCard(
                   isCalendarEvent: true,
                   titleText: 'Kabir ',
                   titleSuffix: 'approved your date request',
@@ -203,151 +199,6 @@ class NotificationsScreen extends StatelessWidget {
               ),
             ),
           ]
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNotificationCard({
-    required BuildContext context,
-    String? imageUrl,
-    IconData? icon,
-    Color? iconColor,
-    Color? iconBgColor,
-    bool isCalendarEvent = false,
-    required String titleText,
-    String? titleBoldText,
-    String? titleSuffix,
-    required String message,
-    bool messageItalic = true,
-    required String time,
-    String? actionText,
-    bool isUnread = false,
-  }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
-      ),
-      child: Stack(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Avatar or Event Icon
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  if (isCalendarEvent)
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.orange.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: const Icon(Icons.calendar_today, color: Colors.orange),
-                    )
-                  else
-                    CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(imageUrl!),
-                    ),
-                  if (!isCalendarEvent && icon != null)
-                    Positioned(
-                      bottom: -4,
-                      right: -4,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: iconBgColor,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
-                        ),
-                        child: Icon(icon, size: 12, color: iconColor),
-                      ),
-                    ),
-                ],
-              ),
-              const SizedBox(width: 16),
-              // Content
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                        style: const TextStyle(color: Colors.black87, fontSize: 14, height: 1.3),
-                        children: [
-                          if (titleBoldText != null) ...[
-                            TextSpan(text: titleText),
-                            TextSpan(text: titleBoldText, style: const TextStyle(fontWeight: FontWeight.bold)),
-                          ] else ...[
-                            TextSpan(text: titleText, style: const TextStyle(fontWeight: FontWeight.bold)),
-                            if (titleSuffix != null) TextSpan(text: titleSuffix),
-                          ],
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      message,
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 14,
-                        fontStyle: messageItalic ? FontStyle.italic : FontStyle.normal,
-                        height: 1.3,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      time,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    if (actionText != null) ...[
-                      const SizedBox(height: 12),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFE84C66),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          actionText,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ]
-                  ],
-                ),
-              ),
-              const SizedBox(width: 12),
-            ],
-          ),
-          if (isUnread)
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Container(
-                width: 8,
-                height: 8,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFE84C66),
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
         ],
       ),
     );
