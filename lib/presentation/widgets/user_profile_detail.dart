@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating_app/domain/entities/user_entity.dart';
 import 'package:dating_app/presentation/pages/compliment_ideas_screen.dart';
 
@@ -158,6 +159,7 @@ class UserProfileDetail extends StatelessWidget {
                 ),
               ],
             ),
+          ),
           ),
           const SizedBox(height: 80), // Space for bottom button
         ],
