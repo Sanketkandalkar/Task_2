@@ -5,6 +5,7 @@ import 'package:dating_app/presentation/bloc/home_bloc.dart';
 import 'package:dating_app/presentation/bloc/home_event.dart';
 import 'package:dating_app/presentation/bloc/home_state.dart';
 import 'package:dating_app/presentation/widgets/user_card.dart';
+import 'package:dating_app/presentation/pages/notifications_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -139,7 +140,12 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(width: 8),
               _buildAppBarIcon(Icons.tune),
               const SizedBox(width: 8),
-              _buildAppBarIcon(Icons.notifications_none, hasBadge: true),
+              _buildAppBarIcon(Icons.notifications_none, hasBadge: true, onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+                );
+              }),
             ],
           )
         ],
@@ -147,37 +153,40 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildAppBarIcon(IconData icon, {bool hasBadge = false}) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 5,
-            spreadRadius: 1,
-          )
-        ],
-      ),
-      child: Stack(
-        children: [
-          Icon(icon, size: 20),
-          if (hasBadge)
-            Positioned(
-              right: 0,
-              top: 0,
-              child: Container(
-                width: 6,
-                height: 6,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFE84C66),
-                  shape: BoxShape.circle,
-                ),
-              ),
+  Widget _buildAppBarIcon(IconData icon, {bool hasBadge = false, VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 5,
+              spreadRadius: 1,
             )
-        ],
+          ],
+        ),
+        child: Stack(
+          children: [
+            Icon(icon, size: 20),
+            if (hasBadge)
+              Positioned(
+                right: 0,
+                top: 0,
+                child: Container(
+                  width: 6,
+                  height: 6,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFE84C66),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              )
+          ],
+        ),
       ),
     );
   }

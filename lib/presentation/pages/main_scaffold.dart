@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dating_app/presentation/pages/home_page.dart';
+import 'package:dating_app/presentation/pages/chat_screen.dart';
+import 'package:dating_app/presentation/pages/date_now_screen.dart';
 
 class MainScaffold extends StatefulWidget {
   const MainScaffold({super.key});
@@ -13,9 +15,9 @@ class _MainScaffoldState extends State<MainScaffold> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const Center(child: Text('Date Now')),
+    const DateNowScreen(),
     const Center(child: Text('Admirers')),
-    const Center(child: Text('Chat')),
+    const ChatScreen(),
     const Center(child: Text('Events')),
   ];
 
@@ -44,7 +46,7 @@ class _MainScaffoldState extends State<MainScaffold> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.play_circle_outline),
+            icon: Icon(Icons.access_time),
             label: 'Date Now',
           ),
           BottomNavigationBarItem(
