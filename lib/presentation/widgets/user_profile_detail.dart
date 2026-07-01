@@ -88,6 +88,31 @@ class UserProfileDetail extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 32),
+          _buildPromptCard(context, 'My simple pleasures...', user.simplePleasures),
+          const SizedBox(height: 32),
+          _buildSectionTitle('INTERESTS & HOBBIES'),
+          const SizedBox(height: 16),
+          _buildInterests(user.interests),
+          const SizedBox(height: 32),
+          _buildSectionTitle('LIFESTYLE'),
+          const SizedBox(height: 16),
+          _buildLifestyle(user.lifestyle),
+          const SizedBox(height: 32),
+          _buildDatingGoalCard(user.datingGoalTitle, user.datingGoalDescription),
+          const SizedBox(height: 32),
+          Container(
+            height: 400,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              image: DecorationImage(
+                image: NetworkImage(user.largeImageUrl),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          _buildPromptCard(context, user.promptTwoTitle, user.promptTwoDescription),
+          const SizedBox(height: 32),
           // Video Intro
           Container(
             height: 200,
@@ -214,6 +239,376 @@ class UserProfileDetail extends StatelessWidget {
     return Divider(
       color: Colors.grey.withOpacity(0.2),
       height: 16,
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        color: Color(0xFFE84C66),
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 1.5,
+      ),
+    );
+  }
+
+  Widget _buildPromptCard(BuildContext context, String title, String content) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              color: Color(0xFFE84C66),
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            content,
+            style: const TextStyle(
+              color: Colors.black87,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 16),
+          // Rose icon bottom left
+          GestureDetector(
+            onTap: () => _showComplimentBottomSheet(context),
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 5,
+                    spreadRadius: 1,
+                  )
+                ],
+              ),
+              child: const Text('🌹', style: TextStyle(fontSize: 18)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showComplimentBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFFF8F5F2),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
+              ),
+            ),
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  'COMPLIMENTING',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Prompt',
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildStatPill(Icons.chat_bubble_outline, '3 comments'),
+                    _buildStatPill(null, '🌹 2 roses'),
+                    _buildStatPill(Icons.monetization_on, '5,258 balance', iconColor: Colors.amber),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Colors.pink.withOpacity(0.3)),
+                  ),
+                  child: TextField(
+                    maxLines: 3,
+                    decoration: InputDecoration(
+                      hintText: 'Write a sweet compliment...',
+                      hintStyle: const TextStyle(color: Colors.grey),
+                      border: InputBorder.none,
+                      contentPadding: const EdgeInsets.all(16),
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.grey.withOpacity(0.2)),
+                            ),
+                            child: const Text('💡 Try', style: TextStyle(color: Colors.black87, fontSize: 12, fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(color: Colors.grey.withOpacity(0.2)),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('🌹 Rose', style: TextStyle(fontWeight: FontWeight.bold)),
+                            SizedBox(width: 8),
+                            Icon(Icons.check_circle, size: 16, color: Colors.grey),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(color: Colors.grey.withOpacity(0.2)),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.card_giftcard, size: 16, color: Colors.orange),
+                            SizedBox(width: 8),
+                            Text('Select Gift', style: TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                const Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('0/140', style: TextStyle(color: Colors.grey, fontSize: 10)),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.pink),
+                      ),
+                      child: const Column(
+                        children: [
+                          Icon(Icons.favorite, color: Colors.pink, size: 20),
+                          Text('Like', style: TextStyle(color: Colors.pink, fontSize: 10, fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE84C66).withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Send Compliment',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildStatPill(IconData? icon, String text, {Color? iconColor}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (icon != null) ...[
+            Icon(icon, size: 14, color: iconColor ?? Colors.grey),
+            const SizedBox(width: 4),
+          ],
+          Text(text, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInterests(List<String> interests) {
+    return Wrap(
+      spacing: 12,
+      runSpacing: 12,
+      children: interests.map((interest) {
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.star_border, size: 16, color: Color(0xFFE84C66)),
+              const SizedBox(width: 8),
+              Text(
+                interest,
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildLifestyle(Map<String, String> lifestyle) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: lifestyle.entries.map((entry) {
+          final isLast = entry.key == lifestyle.keys.last;
+          return Column(
+            children: [
+              _buildBasicRow(
+                Icons.check_circle_outline, // generic icon, can be mapped specifically
+                entry.key,
+                entry.value,
+              ),
+              if (!isLast) _buildDivider(),
+            ],
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildDatingGoalCard(String title, String description) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: const Color(0xFFEE6580),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'DATING GOAL',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.5,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            description,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

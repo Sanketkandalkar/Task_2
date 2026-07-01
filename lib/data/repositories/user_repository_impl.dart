@@ -40,6 +40,18 @@ class UserRepositoryImpl implements UserRepository {
         motherTongue: 'Marathi',
         communicationStyle: 'Phone calls over texts',
         videoIntroUrl: 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+        simplePleasures: 'Roadside chai after a long trek, no signal, good company.',
+        interests: const ['Travel', 'Coffee', 'Trekking', 'Books', 'Yoga', 'Indie music', 'Cooking', 'Photography'],
+        lifestyle: const {
+          'Diet': 'Vegetarian',
+          'Drinking': 'Socially',
+          'Pets': 'Cat parent',
+          'Sleep': 'Night Owl',
+        },
+        datingGoalTitle: 'Long-term, marriage-open',
+        datingGoalDescription: 'No pressure, no timelines — just looking for the right person to build something real with.',
+        promptTwoTitle: "We'll get along if...",
+        promptTwoDescription: 'You can debate me for an hour and still want dessert after.',
       );
     }).toList();
   }

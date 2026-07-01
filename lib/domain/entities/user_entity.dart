@@ -27,6 +27,15 @@ class UserEntity extends Equatable {
   final String communicationStyle;
   final String videoIntroUrl;
 
+  // New fields for extended profile
+  final String simplePleasures;
+  final List<String> interests;
+  final Map<String, String> lifestyle;
+  final String datingGoalTitle;
+  final String datingGoalDescription;
+  final String promptTwoTitle;
+  final String promptTwoDescription;
+
   const UserEntity({
     required this.id,
     required this.firstName,
@@ -51,6 +60,13 @@ class UserEntity extends Equatable {
     required this.motherTongue,
     required this.communicationStyle,
     required this.videoIntroUrl,
+    required this.simplePleasures,
+    required this.interests,
+    required this.lifestyle,
+    required this.datingGoalTitle,
+    required this.datingGoalDescription,
+    required this.promptTwoTitle,
+    required this.promptTwoDescription,
   });
 
   @override
@@ -78,5 +94,12 @@ class UserEntity extends Equatable {
         motherTongue,
         communicationStyle,
         videoIntroUrl,
+        simplePleasures,
+        interests,
+        lifestyle,
+        datingGoalTitle,
+        datingGoalDescription,
+        promptTwoTitle,
+        promptTwoDescription,
       ];
 }
