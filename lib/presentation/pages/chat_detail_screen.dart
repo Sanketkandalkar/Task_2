@@ -30,7 +30,7 @@ class ChatDetailScreen extends StatelessWidget {
               Stack(
                 children: [
                   const CircleAvatar(
-                    backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=aanya'),
+                    backgroundImage: NetworkImage('https://randomuser.me/api/portraits/women/44.jpg'),
                   ),
                   Positioned(
                     bottom: 0,
