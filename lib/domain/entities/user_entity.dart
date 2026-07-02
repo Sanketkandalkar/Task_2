@@ -7,6 +7,7 @@ class UserEntity extends Equatable {
   final String fullName;
   final int age;
   final String city;
+  final String state;
   final String country;
   final String profileImageUrl;
   final String largeImageUrl;
@@ -43,6 +44,7 @@ class UserEntity extends Equatable {
     required this.fullName,
     required this.age,
     required this.city,
+    required this.state,
     required this.country,
     required this.profileImageUrl,
     required this.largeImageUrl,
@@ -77,6 +79,7 @@ class UserEntity extends Equatable {
         fullName,
         age,
         city,
+        state,
         country,
         profileImageUrl,
         largeImageUrl,

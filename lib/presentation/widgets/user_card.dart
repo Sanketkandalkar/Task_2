@@ -107,7 +107,7 @@ class UserCard extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(height: 8),
-                              _buildInfoRow(Icons.location_on_outlined, '${user.city} - 7 km away'),
+                              _buildInfoRow(Icons.location_on_outlined, '${user.city}, ${user.state} - 7 km away'),
                               const SizedBox(height: 4),
                               _buildInfoRow(Icons.work_outline, '${user.jobTitle} • ${user.height}'),
                               const SizedBox(height: 4),

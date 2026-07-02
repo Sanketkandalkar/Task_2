@@ -22,6 +22,7 @@ class UserRepositoryImpl implements UserRepository {
         fullName: '${model.firstName} ${model.lastName}',
         age: model.age,
         city: model.city,
+        state: model.state,
         country: model.country,
         profileImageUrl: model.profileImageUrl,
         largeImageUrl: model.largeImageUrl,
