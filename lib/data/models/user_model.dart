@@ -27,8 +27,8 @@ class UserModel {
       age: json['dob']['age'] ?? 0,
       city: json['location']['city'] ?? '',
       country: json['location']['country'] ?? '',
-      profileImageUrl: json['picture']['medium'] ?? '',
-      largeImageUrl: json['picture']['large'] ?? '',
+      profileImageUrl: 'https://i.pravatar.cc/150?u=${json['login']['uuid']}',
+      largeImageUrl: 'https://i.pravatar.cc/800?u=${json['login']['uuid']}',
     );
   }
 }

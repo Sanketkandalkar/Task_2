@@ -528,21 +528,24 @@ class _ComplimentBottomSheetWidgetState extends State<ComplimentBottomSheetWidge
                   border: InputBorder.none,
                   contentPadding: const EdgeInsets.all(16),
                   suffixIcon: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: GestureDetector(
-                        onTap: _navigateToComplimentIdeas,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.grey.withOpacity(0.2)),
+                    padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        GestureDetector(
+                          onTap: _navigateToComplimentIdeas,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.grey.withOpacity(0.2)),
+                            ),
+                            child: const Text('💡 Try', style: TextStyle(color: Colors.black87, fontSize: 12, fontWeight: FontWeight.bold)),
                           ),
-                          child: const Text('💡 Try', style: TextStyle(color: Colors.black87, fontSize: 12, fontWeight: FontWeight.bold)),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),

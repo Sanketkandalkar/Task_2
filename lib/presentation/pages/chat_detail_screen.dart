@@ -30,7 +30,7 @@ class ChatDetailScreen extends StatelessWidget {
               Stack(
                 children: [
                   const CircleAvatar(
-                    backgroundImage: NetworkImage('https://randomuser.me/api/portraits/women/44.jpg'),
+                    backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=aanya'),
                   ),
                   Positioned(
                     bottom: 0,
@@ -215,7 +215,7 @@ class ChatDetailScreen extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF8F5F2),
                       borderRadius: BorderRadius.circular(24),
@@ -223,7 +223,13 @@ class ChatDetailScreen extends StatelessWidget {
                     child: const Row(
                       children: [
                         Expanded(
-                          child: Text('Message Aanya...', style: TextStyle(color: Colors.grey)),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Message Aanya...',
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: InputBorder.none,
+                            ),
+                          ),
                         ),
                         Icon(Icons.mic_none, color: Colors.grey, size: 20),
                       ],
